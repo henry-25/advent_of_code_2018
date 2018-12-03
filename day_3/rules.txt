@@ -1,0 +1,17 @@
+For there to be a conflict
+
+For the Inner square top left corner to be inside:
+    Outer square top left corner x and y are less
+    Outer square bottom right corner x and y are greater
+
+For the Inner square top right corner to be inside:
+    Outer square top right corner x is greater and y is less
+    Outer square bottom left corner x is less y is greater
+
+For the Inner square bottom left corner to be inside:
+    Outer square top right corner x is greater and y is less
+    Outer square bottom left corner x is less and y is greater
+
+For the Inner square bottom right corner to be inside:
+    Outer square top left corner x is less and y is less
+    Outer square bottom right corner x is greater and y is greater
