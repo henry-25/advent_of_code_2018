@@ -19,11 +19,13 @@ def main():
         # print(k, ord(k) - 4)
         new_dict[k] = {'time' : (ord(k) - 4), 'step_pre' :  step_prequisites[k]}
 
-    pprint.pprint(new_dict)
+    with open('dict.txt', 'a') as f:
+        print(new_dict, file=f)
 
     workers_available = 5
     seconds_passed = 0
     current_steps = []
+    steps_done = []
 
     while len(new_dict):
         # If workers available assign them a task
@@ -52,22 +54,24 @@ def main():
         # print('New dict:', new_dict)
         # print('Current steps:', current_steps)
         
+        with open('file_output.txt', 'a') as f:
+            print((seconds_passed, current_steps, steps_done), file=f)
+
         # For each step currently being worked on reduce the time remaining by one second
         for i in current_steps:
             new_dict[i]['time'] -= 1
             # If step is completed, remove it from the current steps, remove it from the available steps to work on,
-            # increment the number of available workers
+            # increment the number of available workers, remove step from preq of previous steps
             if new_dict[i]['time'] == 0:
                 current_steps.remove(i)
                 new_dict.pop(i)
+                steps_done.append(i)
                 workers_available += 1
 
-                # Remove step from prequisites of other steps
                 for k in new_dict:
                     if i in new_dict[k]['step_pre']:
                         new_dict[k]['step_pre'].remove(i)
                         
-        print(seconds_passed, current_steps)
         seconds_passed += 1
 
     print(seconds_passed)
