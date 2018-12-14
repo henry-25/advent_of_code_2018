@@ -16,28 +16,29 @@ def main():
     # entries[0] is number of child nodes 
     # entries[1] is the quantity of metadata entries
 
+    # total, value, remaining = parse(entries)
+
+    # print('part 1:', total)
+    # print('part 2:', value)
+
     print(getMetadataSum(entries))
 
-
 def getMetadataSum(entries):
-    if(len(entries) == 0):
-        return 0
-    if(entries[0] == 0):
-        # print('Metadata entries', entries)
-        numMetaData = entries[1]
-        metadataSum = 0
-        for i in entries[2:2 + entries[1]]:
-            metadataSum += i
-        return metadataSum + getMetadataSum(entries[2 + numMetaData:])
-    else:
-        entries[0] = 0
-        # print('Entries', entries)
-        child_array = entries[2:len(entries) - entries[1]]
-        parent_array = entries[:2] + entries[len(entries) - entries[1]:]
-        # print('Child', child_array)
-        # print('Parent', parent_array)
-        return getMetadataSum(child_array) + getMetadataSum(parent_array) 
+    print(entries)
+    num_children, num_metadata_entries = entries[:2]
+    entries = entries[2:]
+    all_total = 0
 
+    for i in range(num_children):
+        child_total, entries = getMetadataSum(entries)
+        all_total += child_total
+
+    all_total += sum(entries[:num_metadata_entries])
+
+    if num_children == 0:
+        return (all_total, entries[num_metadata_entries:]) 
+    else:
+        return (all_total, entries[num_metadata_entries:])
 
 if __name__ == "__main__":
     main()
