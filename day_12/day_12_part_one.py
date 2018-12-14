@@ -24,6 +24,8 @@ with open('input.txt') as input_file:
                 rules['#'].update({line[0].strip() : line[1].strip()})
 
 i = 0
+previous_iterations = [plant_pots]
+
 while i < num_generations:
     print(i)
     updates = ['.' for x in range(201)]
@@ -39,6 +41,10 @@ while i < num_generations:
                 updates[a] = rules['#'][constructed_plant_key]
             else:
                 updates[a] = '.'
+    if updates in previous_iterations:
+        i = num_generations
+        print(updates)
+    previous_iterations.append(updates)
     plant_pots = updates
     i += 1
         
