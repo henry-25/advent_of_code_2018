@@ -1,7 +1,7 @@
 def main():
     data = []
 
-    with open('input_example.txt') as input_file:
+    with open('input.txt') as input_file:
         for line in input_file:
             data = line.split(';')
     
