@@ -3,16 +3,27 @@ import pprint
 def part_one():
     width, height = 50, 50
     open_space = [['.' for x in range(width)] for y in range(height)]
-    minutes_passed = 1
+    minutes_passed = 0
     
+    saved_states = list()
+    min_associated = list()
+
     with open('input.txt') as input_file:
         for line_count, line in enumerate(input_file):
             for char_count, char in enumerate(line):
                 if line_count < 50 and char_count < 50:
                     open_space[line_count][char_count] = char
 
-    while minutes_passed < 1000000001:
-        print('Minute', minutes_passed)
+    # Finding 1000000000 element find pattern starting min 505
+    while minutes_passed < 524:
+        # if not open_space in saved_states:
+        #     saved_states.append(open_space)
+        #     min_associated.append((open_space, minutes_passed))
+        # else:
+        #     print('Minutes passed', minutes_passed)
+        #     for i in min_associated:
+        #         if (i[0] == open_space):
+        #             print(i[1])
         mid_change = [['.' for x in range(width)] for y in range(height)]
         for line_num, line in enumerate(open_space):
             for spot_num, spot in enumerate(line):
