@@ -1,28 +1,36 @@
 def main():
-    grid_serial_number = 18
+    grid_serial_number = 2568
     max_power_level = -999
     max_power_corner = (0,0)
     max_power_size = -999
     grid_power_level = dict()
 
+    # for x in range(1, 300):
+    #     for y in range(1, 300):
+    #         grid_power_level[(x, y)] = findPowerLevel(x, y, grid_serial_number)
+
     for x in range(1, 301):
         for y in range(1, 301):
-            grid_power_level[(x, y)] = findPowerLevel(x, y, grid_serial_number)
-
-    for x in range(1, 298):
-        for y in range(1, 298):
+            max_size = 0
+            if x < y:
+                max_size = 301 - y
+            else:
+                max_size = 301 - x
+            curr_power = 0
+            for i in range(1, max_size):     
+                print((x, y), i, (x + i, y + i))
             # for size in range(3, 300):
                 # print(x,y,size)
                 # if x + size > 300 or y + size > 300:
                 #     pass
                 # else:
-            max_size = min(300 - x, 300 - y)
-            print(x, y, max_size)
-            curr_corner_power, ms = findSquarePowerLevel(x, y, max_size, grid_power_level)
-            if (curr_corner_power > max_power_level):
-                max_power_level = curr_corner_power
-                max_power_corner = (x, y)
-                max_power_size = ms
+            # max_size = min(300 - x, 300 - y)
+            # print(x, y, max_size)
+            # curr_corner_power, ms = findSquarePowerLevel(x, y, max_size, grid_power_level)
+            # if (curr_corner_power > max_power_level):
+            #     max_power_level = curr_corner_power
+            #     max_power_corner = (x, y)
+            #     max_power_size = ms
     
     print(max_power_corner)
     print(max_power_size)
